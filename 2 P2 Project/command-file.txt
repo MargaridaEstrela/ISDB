@@ -1,0 +1,9 @@
+load database
+    from '/home/jovyan/data/database.sqlite'
+    into postgresql://db:db@postgres/db
+
+with include drop, create tables, create indexes, reset sequences,
+
+prefetch rows = 100, max parallel create index = 1
+
+set work_mem to '16MB', maintenance_work_mem to '512 MB';
