@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block header %}
+    <h1>
+        {% block title %}
+            Player {{ player['player_api_id'] }} | Edit
+        {% endblock title %}
+    </h1>
+{% endblock header %}
+{% block content %}
+    <form method="post">
+        <label for="player_api_id">Player API ID</label>
+        <input name="player_api_id"
+                id="player_api_id"
+                type="text"
+                value="{{ request.form['player_api_id'] or player['player_api_id'] }}"
+                disabled />
+        <label for="date">Date</label>
+        <input name="date"
+                id="date"
+                type="datetime-local"
+                step="1"
+                value="{{ request.form['date'] or player['date'] }}"
+                required />
+        <input type="submit" value="Save" />
+    </form>
+{% endblock content %}
