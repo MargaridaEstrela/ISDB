@@ -63,7 +63,7 @@ pool = ConnectionPool(
 
 
 def is_valid_date(s):
-    """Returns True if string is in date number."""
+    """Returns True if string is in date number."""    
     try:
         print("Date:", s)
         datetime.strptime(s, "%Y-%m-%dT%H:%M:%S")
@@ -130,9 +130,9 @@ def player_update_save(player_api_id):
 
     error = None
 
-    if not date:
+    if date == "":
         error = "Date is required."
-    if not is_valid_date(date):
+    elif not is_valid_date(date):
         error = "Date is required to be in the format 'DD/MM/YYYY, HH:MM:SS'."
 
     if error is not None:
@@ -155,7 +155,7 @@ def player_update_save(player_api_id):
         # The connection is returned to the pool at the end of the `connection()` context but,
         # because it is not in a transaction state, no COMMIT is executed.
 
-        return redirect(url_for("players_index"))
+    return redirect(url_for("players_index"))
 
 @app.route("/ping", methods=("GET",))
 @limiter.exempt

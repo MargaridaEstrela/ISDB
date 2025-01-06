@@ -1,13 +1,16 @@
 html {
-  font-family: sans-serif;
-  background: #eee;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to bottom, #f0f4f8, #eaf0f4);
   padding: 1rem;
 }
 
 body {
   max-width: 960px;
   margin: 0 auto;
-  background: white;
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1,
@@ -16,25 +19,37 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: serif;
-  color: #377ba8;
+  font-family: 'Merriweather', serif;
+  color: #014f5b; /* Deep teal */
   margin: 1rem 0;
+  letter-spacing: 1px;
 }
 
 a {
-  color: #377ba8;
+  color: #ff9f1c; /* Bright orange */
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f15a24; /* Slightly darker orange */
 }
 
 hr {
   border: none;
-  border-top: 1px solid lightgray;
+  border-top: 1px solid #d3d3d3;
 }
 
 nav {
-  background: lightgray;
+  background: #00798c; /* Vibrant teal */
+  color: white;
   display: flex;
   align-items: center;
-  padding: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  position: sticky; /* Sticky navbar */
+  top: 0;
+  z-index: 1000;
 }
 
 nav h1 {
@@ -44,7 +59,12 @@ nav h1 {
 
 nav h1 a {
   text-decoration: none;
+  color: white;
   padding: 0.25rem 0.5rem;
+}
+
+nav h1 a:hover {
+  color: #76c3d4; /* Light blue */
 }
 
 nav ul {
@@ -54,11 +74,21 @@ nav ul {
   padding: 0;
 }
 
-nav ul li a,
-nav ul li span,
-header .action {
+nav ul li a {
   display: block;
   padding: 0.5rem;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #f15a24; /* Bright orange */
+}
+
+nav ul li.active a {
+  font-weight: bold;
+  background-color: #76c3d4;
+  border-radius: 5px;
 }
 
 .content {
@@ -66,27 +96,79 @@ header .action {
 }
 
 .content > header {
-  border-bottom: 1px solid lightgray;
-  display: flex;
-  align-items: flex-end;
+  border: none;
+  padding: 0.5rem 0.5rem;
 }
 
 .content > header h1 {
-  flex: auto;
-  margin: 1rem 0 0.25rem 0;
+  color: #014f5b; /* Deep teal */
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 1rem;
 }
 
 .flash {
-  margin: 1em 0;
-  padding: 1em;
-  background: #cae6f6;
-  border: 1px solid #377ba8;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 1px solid #f0ad4e; /* Warning border */
+  background-color: #fff3cd; /* Light yellow background */
+  color: #856404; /* Dark yellow text */
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: fadeout-remove 5s forwards; /* Controls fading out and removal */
+}
+
+@keyframes fadeout-remove {
+  0% {
+    opacity: 1;
+    height: auto;
+    margin: 1.5rem 0;
+    padding: 1rem;
+  }
+  80% {
+    opacity: 0;
+    height: auto;
+    margin: 1.5rem 0;
+    padding: 1rem;
+  }
+  100% {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.post {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.post:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.post:nth-child(even) {
+  background-color: #ffffff;
 }
 
 .post > header {
   display: flex;
   align-items: flex-end;
   font-size: 0.85em;
+  margin-bottom: 1rem;
 }
 
 .post > header > div:first-of-type {
@@ -96,19 +178,32 @@ header .action {
 .post > header h1 {
   font-size: 1.5em;
   margin-bottom: 0;
+  color: #00798c; /* Vibrant teal */
 }
 
 .post .about {
-  color: slategray;
-  font-style: italic;
+  color: #6c757d;
+  font-size: 0.9rem;
 }
 
 .post .body {
   white-space: pre-line;
+  color: #495057;
 }
 
-.content:last-child {
-  margin-bottom: 0;
+.post a {
+  color: #ff9f1c;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid #ff9f1c;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.post a:hover {
+  background-color: #ff9f1c;
+  color: white;
 }
 
 .content form {
@@ -120,11 +215,16 @@ header .action {
 .content label {
   font-weight: bold;
   margin-bottom: 0.5em;
+  color: #014f5b; /* Deep teal */
 }
 
 .content input,
 .content textarea {
   margin-bottom: 1em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0.5em;
+  font-family: 'Roboto', sans-serif;
 }
 
 .content textarea {
@@ -139,4 +239,57 @@ input.danger {
 input[type="submit"] {
   align-self: start;
   min-width: 10em;
+  background-color: #ff9f1c;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #f15a24;
+}
+
+footer {
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.9rem;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-top: 1px solid #eaeaea;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 0.5rem;
+  }
+
+  .content > header h1 {
+    font-size: 1.5rem;
+  }
+
+  .post {
+    padding: 0.8rem;
+  }
+
+  nav ul li a {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+* {
+  border-radius: 5px;
+}
+
+a,
+input[type="submit"] {
+  transition: all 0.3s ease;
+}
+
+a:focus, button:focus {
+  outline: 2px dashed #00798c;
+  outline-offset: 2px;
 }

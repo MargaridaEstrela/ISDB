@@ -19,8 +19,7 @@
                 id="date"
                 type="datetime-local"
                 step="1"
-                value="{{ request.form['date'] or player['date'] }}"
-                required />
+                value="{{ request.form['date'] or player['date'] }}"/>
         <input type="submit" value="Save" />
     </form>
 {% endblock content %}
