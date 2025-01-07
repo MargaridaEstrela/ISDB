@@ -121,6 +121,65 @@ def player_update_view(player_api_id):
 
     return render_template("players/update.html", player=player)
 
+@app.route("/players/<player_api_id>", methods=("GET",))
+def player_info(player_api_id):
+    """Show the page with all the players attributes."""
+
+    with pool.connection() as conn:
+        with conn.cursor() as cur:
+            player = cur.execute(
+                """
+                SELECT
+                    p.player_api_id,
+                    p.player_name,
+                    p.height,
+                    p.weight,
+                    p.birthday,
+                    pa.date,
+                    pa.overall_rating,
+                    pa.potential,
+                    pa.preferred_foot,
+                    pa.attacking_work_rate,
+                    pa.defensive_work_rate,
+                    pa.crossing,
+                    pa.finishing,
+                    pa.short_passing,
+                    pa.dribbling,
+                    pa.acceleration,
+                    pa.sprint_speed,
+                    pa.agility,
+                    pa.stamina
+                FROM player p
+                JOIN (
+                    SELECT DISTINCT ON (player_api_id)
+                        player_api_id,
+                        date,
+                        overall_rating,
+                        potential,
+                        preferred_foot,
+                        attacking_work_rate,
+                        defensive_work_rate,
+                        crossing,
+                        finishing,
+                        short_passing,
+                        dribbling,
+                        acceleration,
+                        sprint_speed,
+                        agility,
+                        stamina
+                    FROM player_attributes
+                    ORDER BY player_api_id, date DESC
+                ) pa ON p.player_api_id = pa.player_api_id
+                WHERE p.player_api_id = %(player_api_id)s;
+                """,
+                {"player_api_id": player_api_id},
+            ).fetchone()
+            log.debug(f"Found {cur.rowcount} rows.")
+
+    # At the end of the `connection()` context, the transaction is committed
+    # or rolled back, and the connection returned to the pool.
+
+    return render_template("players/info.html", player=player)
 
 @app.route("/players/<player_api_id>/update", methods=("POST",))
 def player_update_save(player_api_id):

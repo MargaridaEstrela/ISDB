@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block header %}
+<h1>{{ player['player_name'] }}</h1>
+{% endblock header %}
+
+{% block content %}
+<div class="player-info">
+    <div class="card">
+        <h2><i class="fa-solid fa-user"></i> General Information</h2>
+        <table>
+            <tr>
+                <td><strong>Player Name:</strong></td>
+                <td>{{ player['player_name'] }}</td>
+            </tr>
+            <tr>
+                <td><strong><i class="fa-solid fa-ruler-vertical"></i> Height:</strong></td>
+                <td>{{ player['height'] }} cm</td>
+            </tr>
+            <tr>
+                <td><strong><i class="fa-solid fa-weight-hanging"></i> Weight:</strong></td>
+                <td>{{ player['weight'] }} kg</td>
+            </tr>
+            <tr>
+                <td><strong><i class="fa-solid fa-cake-candles"></i> Birthday:</strong></td>
+                <td>{{ player['birthday'] }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2><i class="fa-solid fa-star"></i> Attributes</h2>
+        <table class="attributes-table">
+            <thead>
+                <tr>
+                    <th>Overall Rating</th>
+                    <th>Potential</th>
+                    <th>Preferred Foot</th>
+                    <th>Acceleration</th>
+                    <th>Sprint Speed</th>
+                    <th>Agility</th>
+                    <th>Stamina</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ player['overall_rating'] }}</td>
+                    <td>{{ player['potential'] }}</td>
+                    <td>{{ player['preferred_foot'] }}</td>
+                    <td>{{ player['acceleration'] }}</td>
+                    <td>{{ player['sprint_speed'] }}</td>
+                    <td>{{ player['agility'] }}</td>
+                    <td>{{ player['stamina'] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}
