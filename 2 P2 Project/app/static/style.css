@@ -358,6 +358,58 @@ form label + input {
   color: var(--text-light);
 }
 
+.teams-list {
+  list-style: none; /* Remove default bullets */
+  padding: 0;
+  margin: 0;
+}
+
+.teams-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  font-size: 1rem;
+  color: var(--text-light);
+}
+
+.teams-list li:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.teams-list .team-short {
+  font-weight: bold;
+  color: var(--text-highlight);
+  font-size: 1.1rem;
+}
+
+.teams-list .team-long {
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-light);
+  opacity: 0.8;
+}
+
+/* Add hover effects to emphasize the text */
+.teams-list li:hover .team-short {
+  color: var(--text-hover);
+  text-shadow: 0 0 10px var(--text-hover);
+}
+
+.teams-list li:hover .team-long {
+  opacity: 1;
+  color: var(--text-highlight);
+  text-shadow: 0 0 8px var(--text-highlight);
+}
+
+
 @media (max-width: 768px) {
   .post {
     grid-template-rows: auto auto auto; 

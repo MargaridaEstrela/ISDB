@@ -175,11 +175,22 @@ def player_info(player_api_id):
                 {"player_api_id": player_api_id},
             ).fetchone()
             log.debug(f"Found {cur.rowcount} rows.")
+            
+            teams = cur.execute(
+                """
+                SELECT DISTINCT t.team_short_name, t.team_long_name
+                FROM match_player m
+                JOIN team t ON t.team_api_id = m.team_api_id
+                WHERE m.player_api_id = %(player_api_id)s;
+                """,
+                {"player_api_id": player_api_id},
+            ).fetchall()
+            log.debug(f"Found {len(teams)} teams for the player.")
 
     # At the end of the `connection()` context, the transaction is committed
     # or rolled back, and the connection returned to the pool.
 
-    return render_template("players/info.html", player=player)
+    return render_template("players/info.html", player=player, teams=teams)
 
 @app.route("/players/<player_api_id>/update", methods=("POST",))
 def player_update_save(player_api_id):

@@ -55,5 +55,17 @@
             </tbody>
         </table>
     </div>
+
+    <div class="card">
+        <h2><i class="fa-solid fa-people-group"></i> Teams Played</h2>
+        <ul class="teams-list">
+            {% for team in teams %}
+                <li>
+                    <span class="team-short">{{ team.team_short_name }}</span>
+                    <span class="team-long">{{ team.team_long_name }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </div>
 {% endblock content %}
